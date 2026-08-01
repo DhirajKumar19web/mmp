@@ -77,7 +77,7 @@ const config = {
   /**
    * Markdown
    */
-  proseWrap: "preserve"
+  proseWrap: "preserve",
 };
 
 export default config;

@@ -1,0 +1,21 @@
+#!/usr/bin/env sh
+
+echo "========================================"
+echo "🚀 Running pre-push checks..."
+echo "========================================"
+
+echo ""
+echo "🔍 Running ESLint..."
+npm run lint
+
+echo ""
+echo "🧪 Running Tests..."
+npm test
+
+echo ""
+echo "🏗️ Building Project..."
+npm run build
+
+echo ""
+echo "✅ All pre-push checks passed."
+echo "========================================"

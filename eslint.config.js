@@ -1,10 +1,10 @@
 // eslint.config.js
 
 import js from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier";
+import importPlugin from "eslint-plugin-import";
 import globals from "globals";
 import tseslint from "typescript-eslint";
-import importPlugin from "eslint-plugin-import";
-import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
   // Ignore generated files
@@ -13,9 +13,12 @@ export default tseslint.config(
       "dist/**",
       "coverage/**",
       "node_modules/**",
+      ".husky/**",
       "*.log",
-      ".husky/**"
-    ]
+
+      "eslint.config.js",
+      "lint-staged.config.js",
+    ],
   },
 
   // JavaScript recommended rules
@@ -25,30 +28,36 @@ export default tseslint.config(
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
 
+  // Disable type-aware linting for JS files (e.g. config files)
+  {
+    files: ["**/*.js", "**/*.mjs", "**/*.cjs"],
+    ...tseslint.configs.disableTypeChecked,
+  },
+
   {
     files: ["**/*.ts"],
 
     languageOptions: {
       parserOptions: {
         project: "./tsconfig.json",
-        tsconfigRootDir: import.meta.dirname
+        tsconfigRootDir: import.meta.dirname,
       },
 
       globals: {
-        ...globals.node
-      }
+        ...globals.node,
+      },
     },
 
     plugins: {
-      import: importPlugin
+      import: importPlugin,
     },
 
     settings: {
       "import/resolver": {
         typescript: {
-          project: "./tsconfig.json"
-        }
-      }
+          project: "./tsconfig.json",
+        },
+      },
     },
 
     rules: {
@@ -56,10 +65,7 @@ export default tseslint.config(
          General
       ========================================================== */
 
-      "no-console":
-        process.env.NODE_ENV === "production"
-          ? "error"
-          : "warn",
+      "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
 
       "no-debugger": "error",
 
@@ -71,9 +77,9 @@ export default tseslint.config(
 
       "no-var": "error",
 
-      "eqeqeq": ["error", "always"],
+      eqeqeq: ["error", "always"],
 
-      "curly": ["error", "all"],
+      curly: ["error", "all"],
 
       /* ==========================================================
          TypeScript
@@ -86,16 +92,16 @@ export default tseslint.config(
         {
           argsIgnorePattern: "^_",
           varsIgnorePattern: "^_",
-          caughtErrorsIgnorePattern: "^_"
-        }
+          caughtErrorsIgnorePattern: "^_",
+        },
       ],
 
       "@typescript-eslint/consistent-type-imports": [
         "error",
         {
           prefer: "type-imports",
-          fixStyle: "inline-type-imports"
-        }
+          fixStyle: "inline-type-imports",
+        },
       ],
 
       "@typescript-eslint/no-floating-promises": "error",
@@ -105,8 +111,8 @@ export default tseslint.config(
       "@typescript-eslint/no-misused-promises": [
         "error",
         {
-          checksVoidReturn: false
-        }
+          checksVoidReturn: false,
+        },
       ],
 
       "@typescript-eslint/no-unnecessary-type-assertion": "error",
@@ -132,8 +138,8 @@ export default tseslint.config(
       "import/newline-after-import": [
         "error",
         {
-          count: 1
-        }
+          count: 1,
+        },
       ],
 
       "import/order": [
@@ -145,18 +151,18 @@ export default tseslint.config(
             "internal",
             ["parent", "sibling", "index"],
             "object",
-            "type"
+            "type",
           ],
 
           alphabetize: {
             order: "asc",
-            caseInsensitive: true
+            caseInsensitive: true,
           },
 
-          "newlines-between": "always"
-        }
-      ]
-    }
+          "newlines-between": "always",
+        },
+      ],
+    },
   },
 
   // Disable formatting rules that conflict with Prettier

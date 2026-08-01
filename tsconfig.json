@@ -2,11 +2,10 @@
   "extends": "./tsconfig.build.json",
 
   "compilerOptions": {
-    // Don't emit JS while developing
-    "noEmit": true
+    "noEmit": true,
+    "ignoreDeprecations": "6.0",
+    "rootDir": "."
   },
 
-  "include": [
-    "src"
-  ]
+  "include": ["src", "jest.config.ts"]
 }
