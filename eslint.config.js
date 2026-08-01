@@ -65,7 +65,7 @@ export default tseslint.config(
          General
       ========================================================== */
 
-      "no-console": process.env.NODE_ENV === "production" ? "error" : "warn",
+      "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
 
       "no-debugger": "error",
 
