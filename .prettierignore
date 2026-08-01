@@ -1,0 +1,34 @@
+# Dependencies
+node_modules
+
+# Build
+dist
+coverage
+
+# Logs
+*.log
+
+# Package manager
+package-lock.json
+
+# Environment
+.env
+
+# Git
+.git
+
+# IDE
+.vscode
+
+# Generated
+*.tsbuildinfo
+
+# Reports
+reports
+
+# Temporary
+tmp
+temp
+
+# Swagger generated files
+swagger-output.json

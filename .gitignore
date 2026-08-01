@@ -1,0 +1,61 @@
+# Operating System Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build Output & Cache
+dist/
+build/
+out/
+*.tsbuildinfo
+.tscache/
+
+# Test & Coverage
+coverage/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment Files
+.env
+.env.*
+!.env.example
+
+# IDE & Editor Files
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Allow VS Code team configuration files while ignoring user state
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Python & Java (if applicable)
+__pycache__/
+*.pyc
+venv/
+*.class
+target/
+
+# Temporary Files
+*.tmp
+*.swp

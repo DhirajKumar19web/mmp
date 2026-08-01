@@ -1,0 +1,103 @@
+{
+  // ==========================================================================
+  // Editor
+  // ==========================================================================
+
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+  "editor.formatOnSave": true,
+
+  "editor.formatOnPaste": true,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always",
+    "source.organizeImports": "always"
+  },
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "editor.rulers": [100],
+
+  "editor.wordWrap": "off",
+
+  "editor.renderWhitespace": "selection",
+
+  "editor.minimap.enabled": false,
+
+  // ==========================================================================
+  // Files
+  // ==========================================================================
+
+  "files.insertFinalNewline": true,
+
+  "files.trimTrailingWhitespace": true,
+
+  "files.trimFinalNewlines": true,
+
+  "files.eol": "\n",
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/dist": true,
+    "**/coverage": true,
+    "**/node_modules": true
+  },
+
+  // ==========================================================================
+  // Search
+  // ==========================================================================
+
+  "search.exclude": {
+    "**/dist": true,
+    "**/coverage": true,
+    "**/node_modules": true
+  },
+
+  // ==========================================================================
+  // TypeScript
+  // ==========================================================================
+
+  "typescript.tsdk": "node_modules/typescript/lib",
+
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // ==========================================================================
+  // ESLint
+  // ==========================================================================
+
+  "eslint.useFlatConfig": true,
+
+  "eslint.validate": [
+    "typescript"
+  ],
+
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+
+  // ==========================================================================
+  // Prettier
+  // ==========================================================================
+
+  "prettier.requireConfig": true,
+
+  // ==========================================================================
+  // Git
+  // ==========================================================================
+
+  "git.enableSmartCommit": true,
+
+  "git.confirmSync": false,
+
+  // ==========================================================================
+  // Explorer
+  // ==========================================================================
+
+  "explorer.compactFolders": false
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.build.json",
+
+  "compilerOptions": {
+    // Don't emit JS while developing
+    "noEmit": true
+  },
+
+  "include": [
+    "src"
+  ]
+}
