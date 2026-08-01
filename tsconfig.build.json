@@ -25,6 +25,8 @@
     // Build output
     "outDir": "./dist",
 
+    "noEmit": false,
+
     // Path aliases
     "paths": {
       "@/*": ["./src/*"],
