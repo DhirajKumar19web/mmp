@@ -24,6 +24,7 @@
       "@/*": ["./src/*"],
       "@common/*": ["./src/common/*"],
       "@config/*": ["./src/config/*"],
+      "@redis/*": ["./src/redis/*"],
       "@middleware/*": ["./src/common/middleware/*", "./src/middleware/*"],
       "@utils/*": ["./src/common/utils/*", "./src/utils/*"],
       "@types/*": ["./src/common/types/*", "./src/types/*"],
