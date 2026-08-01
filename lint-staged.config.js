@@ -7,7 +7,7 @@
  */
 
 export default {
-  "*.{ts,js,mts,cts}": ["eslint --fix", "prettier --write"],
+  "src/**/*.ts": ["eslint --fix", "prettier --write"],
 
   "*.{json,yml,yaml,md}": ["prettier --write"],
 };
