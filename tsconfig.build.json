@@ -3,144 +3,102 @@
     /* ==========================================================================
        Language & Runtime
        ========================================================================== */
-
     // JavaScript target
     "target": "ES2023",
-
     // Native ESM for Node.js
     "module": "ESNext",
     "moduleResolution": "Bundler",
-
     // Include latest JS APIs
     "lib": ["ES2023"],
     "types": ["node"],
-
     /* ==========================================================================
        Project Structure
        ========================================================================== */
-
     // Source directory
     "rootDir": "./src",
-
     // Build output
     "outDir": "./dist",
-
     "noEmit": false,
-
     // Path aliases
     "paths": {
       "@/*": ["./src/*"],
-      "@config/*": ["./src/config/*"],
       "@common/*": ["./src/common/*"],
-      "@database/*": ["./src/database/*"],
-      "@modules/*": ["./src/modules/*"],
-      "@middlewares/*": ["./src/middlewares/*"],
-      "@services/*": ["./src/services/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@types/*": ["./src/types/*"],
-      "@constants/*": ["./src/constants/*"],
+      "@config/*": ["./src/config/*"],
+      "@middleware/*": ["./src/common/middleware/*", "./src/middleware/*"],
+      "@utils/*": ["./src/common/utils/*", "./src/utils/*"],
+      "@types/*": ["./src/common/types/*", "./src/types/*"],
+      "@constants/*": ["./src/common/constants/*", "./src/constants/*"],
+      "@errors/*": ["./src/common/errors/*", "./src/errors/*"],
       "@validations/*": ["./src/validations/*"],
       "@logger/*": ["./src/logger/*"]
     },
-
     /* ==========================================================================
        Type Checking
        ========================================================================== */
-
     // Enable all strict checks
     "strict": true,
-
     // Prevent implicit any
     "noImplicitAny": true,
-
     // Null & undefined safety
     "strictNullChecks": true,
-
     // Function type safety
     "strictFunctionTypes": true,
-
     // Bind/call/apply safety
     "strictBindCallApply": true,
-
     // Class initialization
     "strictPropertyInitialization": true,
-
     // 'this' safety
     "noImplicitThis": true,
-
     // Always use unknown in catch
     "useUnknownInCatchVariables": true,
-
     // Prevent accidental override mistakes
     "noImplicitOverride": true,
-
     // Prevent fallthrough
     "noFallthroughCasesInSwitch": true,
-
     // Prevent unreachable indexed access
     "noUncheckedIndexedAccess": true,
-
     // Exact optional properties
     "exactOptionalPropertyTypes": true,
-
     // Detect unused locals
     "noUnusedLocals": true,
-
     // Detect unused parameters
     "noUnusedParameters": true,
-
     // Detect missing return
     "noImplicitReturns": true,
-
     /* ==========================================================================
        Emit
        ========================================================================== */
-
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
-
     // Remove comments in production
     "removeComments": true,
-
     /* ==========================================================================
        Module Compatibility
        ========================================================================== */
-
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-
     // JSON import
     "resolveJsonModule": true,
-
     /* ==========================================================================
        Performance
        ========================================================================== */
-
     // Faster compilation
     "incremental": true,
-
     // Cache location
     "tsBuildInfoFile": "./node_modules/.cache/tsbuildinfo",
-
     // Skip library checking
     "skipLibCheck": true,
-
     /* ==========================================================================
        Consistency
        ========================================================================== */
-
     // Preserve import casing
     "forceConsistentCasingInFileNames": true,
-
     // Isolated compilation
     "isolatedModules": true,
-
     // Verbatim imports
     "verbatimModuleSyntax": true
   },
-
   "include": ["src"],
-
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.spec.ts", "**/__tests__/**"]
 }
