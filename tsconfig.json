@@ -7,5 +7,5 @@
     "rootDir": "."
   },
 
-  "include": ["src", "jest.config.ts"]
+  "include": ["src", "tests", "jest.config.ts"]
 }

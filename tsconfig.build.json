@@ -8,8 +8,8 @@
     "target": "ES2023",
 
     // Native ESM for Node.js
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
 
     // Include latest JS APIs
     "lib": ["ES2023"],
