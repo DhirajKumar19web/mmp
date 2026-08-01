@@ -25,23 +25,20 @@
     // Build output
     "outDir": "./dist",
 
-    // Base path for aliases
-    "baseUrl": ".",
-
     // Path aliases
     "paths": {
-      "@/*": ["src/*"],
-      "@config/*": ["src/config/*"],
-      "@common/*": ["src/common/*"],
-      "@database/*": ["src/database/*"],
-      "@modules/*": ["src/modules/*"],
-      "@middlewares/*": ["src/middlewares/*"],
-      "@services/*": ["src/services/*"],
-      "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"],
-      "@constants/*": ["src/constants/*"],
-      "@validations/*": ["src/validations/*"],
-      "@logger/*": ["src/logger/*"]
+      "@/*": ["./src/*"],
+      "@config/*": ["./src/config/*"],
+      "@common/*": ["./src/common/*"],
+      "@database/*": ["./src/database/*"],
+      "@modules/*": ["./src/modules/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@types/*": ["./src/types/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@validations/*": ["./src/validations/*"],
+      "@logger/*": ["./src/logger/*"]
     },
 
     /* ==========================================================================
