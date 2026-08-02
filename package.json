@@ -84,6 +84,7 @@
     "test:coverage": "jest --coverage",
     "check": "npm run typecheck && npm run lint && npm run test",
     "rebuild": "npm run clean && npm run build",
+    "seed": "tsx src/scripts/seed.ts",
     "prepare": "husky"
   }
 }

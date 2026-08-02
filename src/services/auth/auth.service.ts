@@ -10,9 +10,6 @@ import { tokenRotationService } from "./token-rotation.service";
 import type { RegisterInput } from "./types";
 
 export class AuthService {
-  /**
-   * Self User Registration for an Existing Organization
-   */
   public async register(input: RegisterInput, meta?: TokenGenerationMeta) {
     const {
       email,
@@ -26,13 +23,11 @@ export class AuthService {
       preferredLanguage,
     } = input;
 
-    // Check if organization exists
     const existingOrg = await OrganizationModel.findById(organization);
     if (!existingOrg) {
       throw new NotFoundError("Organization not found");
     }
 
-    // Check if active user already exists with this email
     const existingUser = await UserModel.findOne({
       email: email.toLowerCase(),
       isDeleted: false,
@@ -42,10 +37,8 @@ export class AuthService {
       throw new ConflictError("User with this email already exists");
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, config.security.bcrypt.saltRounds);
 
-    // Create User
     const user = await UserModel.create({
       firstName,
       ...(lastName ? { lastName } : {}),
@@ -64,7 +57,6 @@ export class AuthService {
       organizationId: user.organization.toString(),
     };
 
-    // Generate JWT tokens AND store RefreshToken document in DB
     const tokens = await generateAndStoreTokens(tokenPayload, meta);
 
     const userObj = user.toObject();
@@ -76,9 +68,6 @@ export class AuthService {
     };
   }
 
-  /**
-   * Enterprise Refresh Token Rotation with Reuse Detection & Redis Locks
-   */
   public async refreshTokens(incomingRefreshToken: string, meta?: TokenGenerationMeta) {
     return tokenRotationService.rotate(incomingRefreshToken, meta);
   }

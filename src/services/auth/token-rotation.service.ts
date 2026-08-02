@@ -54,13 +54,8 @@ export class TokenRotationService {
 
       const newHash = hashToken(newTokens.refreshToken);
 
-      // 6. Execute atomic update inside Mongoose Transaction
-      const dbSession = await mongoose.startSession();
-      await dbSession.withTransaction(async () => {
-        // Mark old token as used
+      const performRotation = async (dbSession?: mongoose.ClientSession) => {
         await refreshTokenRepository.markAsUsed(incomingHash, newHash, dbSession);
-
-        // Store new refresh token in DB
         await refreshTokenRepository.createToken(
           {
             user: new mongoose.Types.ObjectId(decoded.userId),
@@ -78,8 +73,30 @@ export class TokenRotationService {
           },
           dbSession
         );
-      });
-      await dbSession.endSession();
+      };
+
+      // Try transaction first (for Replica Sets), fallback to direct execution for standalone Mongo
+      try {
+        const dbSession = await mongoose.startSession();
+        try {
+          await dbSession.withTransaction(async () => {
+            await performRotation(dbSession);
+          });
+        } finally {
+          await dbSession.endSession();
+        }
+      } catch (err: unknown) {
+        const errorMsg = err instanceof Error ? err.message : String(err);
+        if (
+          errorMsg.includes("replica set") ||
+          errorMsg.includes("Transaction numbers") ||
+          errorMsg.includes("retryable writes")
+        ) {
+          await performRotation();
+        } else {
+          throw err;
+        }
+      }
 
       return newTokens;
     } finally {

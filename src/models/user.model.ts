@@ -261,28 +261,33 @@ UserSchema.pre("validate", function (this: unknown) {
   }
 });
 
-UserSchema.pre("save", function (this: unknown) {
-  const user = this as IUser;
-
-  if (!user.isModified("firstName") && !user.isModified("lastName")) {
+UserSchema.pre("save", function (this: IUser) {
+  if (!this.isModified("firstName") && !this.isModified("lastName")) {
     return;
   }
 
-  const firstName = (user.firstName as Record<string, string> | undefined) ?? {};
-  const lastName = (user.lastName as Record<string, string> | undefined) ?? {};
+  const getPlainObj = (val: unknown): Record<string, string> => {
+    if (!val) return {};
+    return JSON.parse(JSON.stringify(val)) as Record<string, string>;
+  };
 
-  const languages = new Set([...Object.keys(firstName), ...Object.keys(lastName)]);
+  const firstObj = getPlainObj(this.firstName);
+  const lastObj = getPlainObj(this.lastName);
 
   const fullName: Record<string, string> = {};
+  for (const lang of ["en", "hi", "ar", "fr", "es"]) {
+    const first = firstObj[lang]?.trim() ?? "";
+    const last = lastObj[lang]?.trim() ?? "";
+    const name = [first, last].filter(Boolean).join(" ");
 
-  for (const lang of languages) {
-    const first = firstName[lang]?.trim() ?? "";
-    const last = lastName[lang]?.trim() ?? "";
-
-    fullName[lang] = [first, last].filter(Boolean).join(" ");
+    if (name) {
+      fullName[lang] = name;
+    }
   }
 
-  user.fullName = fullName;
+  if (Object.keys(fullName).length > 0) {
+    this.fullName = fullName;
+  }
 });
 
 UserSchema.index(
