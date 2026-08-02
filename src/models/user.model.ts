@@ -1,9 +1,7 @@
 import { model, Schema } from "mongoose";
 
 import { LocalizedStringSchema } from "@/models/localized-string.model";
-import { Gender, UserStatus } from "@/types/user/user.types";
-
-import type { IUser } from "@/types/user/user.interface";
+import { Gender, UserStatus, type IUser } from "@/types/user";
 
 const UserSchema = new Schema(
   {
@@ -252,6 +250,16 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
+
+UserSchema.pre("validate", function (this: unknown) {
+  const user = this as IUser;
+  if (!user.username && user.email) {
+    const emailPrefix = user.email.split("@")[0];
+    if (emailPrefix) {
+      user.username = emailPrefix.toLowerCase();
+    }
+  }
+});
 
 UserSchema.pre("save", function (this: unknown) {
   const user = this as IUser;

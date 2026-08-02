@@ -1,8 +1,6 @@
 import { app } from "@/app";
-import { config } from "@config/config";
-import { connectDB, disconnectDB } from "@config/database";
-import { logger } from "@config/logger";
-import { redisService } from "@redis/redis.client";
+import { config, connectDB, disconnectDB, logger } from "@config";
+import { redisService } from "@redis";
 
 async function main() {
   try {

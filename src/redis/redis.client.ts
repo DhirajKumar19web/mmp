@@ -1,7 +1,6 @@
 import { Cluster, Redis, type RedisOptions } from "ioredis";
 
-import { config } from "@config/config";
-import { logger } from "@config/logger";
+import { config, logger } from "@config";
 
 import { LUA_SCRIPTS } from "./lua-scripts";
 

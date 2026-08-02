@@ -1,4 +1,4 @@
-import type { ApiResponseOptions } from "@common/types/api-response";
+import type { ApiResponseOptions } from "@common/types";
 
 export class ApiResponse<T = unknown> {
   public readonly success: boolean;

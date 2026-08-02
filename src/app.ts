@@ -3,9 +3,7 @@ import cors from "cors";
 import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
 
-import { HTTP_STATUS } from "@/common/constants/httpStatus";
-import { errorHandler, ServiceUnavailableError } from "@/common/errors";
-import { ApiResponse } from "@/common/utils";
+import { ApiResponse, errorHandler, HTTP_STATUS, ServiceUnavailableError } from "@common";
 import { config } from "@config/config";
 
 const app = express();

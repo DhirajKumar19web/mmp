@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 
 import pinoHttp from "pino-http";
 
-import logger from "@/config/logger";
+import { logger } from "@config";
 
 export const httpLogger = pinoHttp({
   logger,

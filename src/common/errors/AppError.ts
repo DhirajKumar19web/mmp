@@ -1,4 +1,4 @@
-import { HTTP_STATUS } from "@common/constants/httpStatus";
+import { HTTP_STATUS } from "@common/constants";
 
 export class AppError extends Error {
   public readonly statusCode: number;

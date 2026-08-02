@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { ZodError } from "zod";
 
-import { HTTP_STATUS } from "@common/constants/httpStatus";
+import { HTTP_STATUS } from "@common/constants";
 import { AppError, TooManyRequestsError } from "@common/errors/AppError";
 
 import type { NextFunction, Request, Response } from "express";
