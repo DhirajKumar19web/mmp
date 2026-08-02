@@ -1,8 +1,11 @@
 export enum UserStatus {
   ACTIVE = "ACTIVE",
   INACTIVE = "INACTIVE",
-  BLOCKED = "BLOCKED",
   PENDING = "PENDING",
+  BLOCKED = "BLOCKED",
+  LOCKED = "LOCKED",
+  SUSPENDED = "SUSPENDED",
+  INVITED = "INVITED",
 }
 
 export enum Gender {

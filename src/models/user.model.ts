@@ -1,7 +1,7 @@
 import { model, Schema } from "mongoose";
 
 import { LocalizedStringSchema } from "@/models/localized-string.model";
-import { Gender } from "@/types/user/user.types";
+import { Gender, UserStatus } from "@/types/user/user.types";
 
 import type { IUser } from "@/types/user/user.interface";
 
@@ -11,11 +11,20 @@ const UserSchema = new Schema(
     // Personal Information
     // ==========================
 
-    firstName: LocalizedStringSchema,
+    firstName: {
+      type: LocalizedStringSchema,
+      required: true,
+    },
 
-    lastName: LocalizedStringSchema,
+    lastName: {
+      type: LocalizedStringSchema,
+      default: {},
+    },
 
-    fullName: LocalizedStringSchema,
+    fullName: {
+      type: LocalizedStringSchema,
+      default: {},
+    },
 
     username: {
       type: String,
@@ -43,10 +52,22 @@ const UserSchema = new Schema(
     dob: Date,
 
     profileImage: {
-      url: String,
-      publicId: String,
-      mimeType: String,
-      size: Number,
+      url: {
+        type: String,
+        default: null,
+      },
+      publicId: {
+        type: String,
+        default: null,
+      },
+      mimeType: {
+        type: String,
+        default: null,
+      },
+      size: {
+        type: Number,
+        default: null,
+      },
     },
 
     // ==========================
@@ -58,8 +79,6 @@ const UserSchema = new Schema(
       required: true,
       select: false,
     },
-
-    providerId: String,
 
     tokenVersion: {
       type: Number,
@@ -122,6 +141,7 @@ const UserSchema = new Schema(
     organization: {
       type: Schema.Types.ObjectId,
       ref: "Organization",
+      required: true,
       index: true,
     },
 
@@ -171,25 +191,14 @@ const UserSchema = new Schema(
       },
     ],
 
-    permissionOverrides: [
-      {
-        permission: {
-          type: Schema.Types.ObjectId,
-          ref: "Permission",
-        },
-
-        isGranted: Boolean,
-      },
-    ],
-
     // ==========================
     // Status
     // ==========================
 
     status: {
       type: String,
-      enum: ["ACTIVE", "INACTIVE", "LOCKED", "SUSPENDED", "INVITED"],
-      default: "ACTIVE",
+      enum: Object.values(UserStatus),
+      default: UserStatus.ACTIVE,
     },
 
     isSuperAdmin: {
@@ -295,11 +304,21 @@ UserSchema.index(
   }
 );
 
-UserSchema.index({
-  organization: 1,
-  status: 1,
-  createdAt: -1,
-});
+UserSchema.index(
+  {
+    organization: 1,
+    username: 1,
+  },
+  {
+    unique: true,
+    partialFilterExpression: {
+      username: { $exists: true },
+      isDeleted: false,
+    },
+  }
+);
+
+UserSchema.index({ organization: 1, isDeleted: 1, status: 1, createdAt: -1 });
 
 export const UserModel = model<IUser>("User", UserSchema);
 export default UserModel;

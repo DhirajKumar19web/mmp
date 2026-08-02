@@ -1,11 +1,6 @@
 import type { Gender, UserStatus } from "@/types/user/user.types";
 import type { Document, Types } from "mongoose";
 
-export interface IPermissionOverride {
-  permission: Types.ObjectId;
-  isGranted: boolean;
-}
-
 export type LocalizedString = string | Map<string, string> | Record<string, string>;
 
 export interface IUser extends Document {
@@ -14,13 +9,16 @@ export interface IUser extends Document {
   fullName?: LocalizedString;
 
   email: string;
+  username?: string;
   phone?: string;
 
   password: string;
 
   profileImage?: {
-    url: string;
-    publicId: string;
+    url?: string | null;
+    publicId?: string | null;
+    mimeType?: string | null;
+    size?: number | null;
   };
 
   gender?: Gender;
@@ -32,10 +30,8 @@ export interface IUser extends Document {
   departments?: Types.ObjectId[];
 
   roles: Types.ObjectId[];
-  permissions: Types.ObjectId[];
   directPermissions?: Types.ObjectId[];
   deniedPermissions?: Types.ObjectId[];
-  permissionOverrides?: IPermissionOverride[];
 
   isEmailVerified: boolean;
   isPhoneVerified: boolean;
