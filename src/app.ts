@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 import { HTTP_STATUS } from "@/common/constants/httpStatus";
 import { errorHandler, ServiceUnavailableError } from "@/common/errors";
-import { ApiResponse } from "@/common/utils/ApiResponse";
+import { ApiResponse } from "@/common/utils";
 import { config } from "@config/config";
 
 const app = express();

@@ -1,5 +1,3 @@
-// src/config/logger.ts
-
 import pino, { type LoggerOptions } from "pino";
 
 import { config } from "@/config";

@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import pino from "pino";
 import { z } from "zod";
 
 dotenv.config();
@@ -97,14 +98,28 @@ const envSchema = z.object({
 const result = envSchema.safeParse(process.env);
 
 if (!result.success) {
-  console.error("\n❌ Invalid environment variables\n");
+  const loggerOptions: pino.LoggerOptions = {
+    name: process.env.SERVICE_NAME ?? "ERP System",
+    level: "error",
+  };
 
-  console.table(
-    result.error.issues.map((issue) => ({
-      Variable: issue.path.join("."),
-      Error: issue.message,
-    }))
-  );
+  if (process.env.LOG_PRETTY !== "false") {
+    loggerOptions.transport = {
+      target: "pino-pretty",
+      options: { colorize: true },
+    };
+  }
+
+  const envLogger = pino(loggerOptions);
+
+  const issues = result.error.issues.map((issue) => ({
+    Variable: issue.path.join("."),
+    Error: issue.message,
+  }));
+
+  envLogger.error({ issues }, "Invalid environment variables");
+
+  console.table(issues);
 
   process.exit(1);
 }
