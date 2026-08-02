@@ -222,6 +222,29 @@ export class RedisService {
     }
     this.inMemoryStore.delete(key);
   }
+
+  public async setNX(key: string, value: string | number, ttlSeconds: number): Promise<boolean> {
+    if (this.getIsConnected() && this.client) {
+      try {
+        const res = await this.client.set(key, String(value), "EX", ttlSeconds, "NX");
+        return res === "OK";
+      } catch (error) {
+        logger.error(
+          { err: error },
+          "Redis setNX operation failed; falling back to in-memory store"
+        );
+      }
+    }
+    const entry = this.inMemoryStore.get(key);
+    if (!entry || (entry.expiresAt !== undefined && entry.expiresAt < Date.now())) {
+      this.inMemoryStore.set(key, {
+        value: typeof value === "number" ? value : 1,
+        expiresAt: Date.now() + ttlSeconds * 1000,
+      });
+      return true;
+    }
+    return false;
+  }
 }
 
 export const redisService = RedisService.getInstance();

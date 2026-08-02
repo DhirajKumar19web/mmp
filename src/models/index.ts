@@ -1,3 +1,4 @@
+export * from "@/models/audit-log.model";
 export * from "@/models/department.model";
 export * from "@/models/localized-string.model";
 export * from "@/models/login-policy.model";

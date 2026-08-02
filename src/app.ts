@@ -4,8 +4,9 @@ import express, { type Request, type Response } from "express";
 import mongoose from "mongoose";
 
 import { ApiResponse, errorHandler, HTTP_STATUS, ServiceUnavailableError } from "@common";
-import { config } from "@config/config";
-import { globalRateLimiter } from "@middlewares";
+import { config } from "@config";
+import { globalRateLimiter, urlSanitizer } from "@middlewares";
+import { rootRouter } from "@routes";
 
 const app = express();
 app.set("trust proxy", config.server.trustProxy || 1);
@@ -21,6 +22,15 @@ app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
+
+// Reusable URL Sanitizer Middleware (Trims accidental spaces & %20)
+app.use(urlSanitizer);
+
+// Global Rate Limiter for all API routes
+app.use(globalRateLimiter);
+
+// API Routes
+app.use(`${config.server.api.prefix}/${config.server.api.version}`, rootRouter);
 
 app.get("/health/live", (_req: Request, res: Response) => {
   res.status(HTTP_STATUS.OK).json(
@@ -53,9 +63,6 @@ app.get("/health/ready", (_req: Request, res: Response) => {
     throw new ServiceUnavailableError("Database disconnected");
   }
 });
-
-// Global Rate Limiter for all API routes
-app.use(globalRateLimiter);
 
 app.use(errorHandler);
 
