@@ -1,4 +1,4 @@
-import { IDENTIFIER_TYPE, RATE_LIMIT_STRATEGY } from "@common/constants/rate-limit.constants";
+import { IDENTIFIER_TYPE, RATE_LIMIT_STRATEGY } from "@constants";
 
 export interface RateLimitRuleConfig {
   type: string;

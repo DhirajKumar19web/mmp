@@ -19,6 +19,9 @@
     // Build output
     "outDir": "./dist",
     "noEmit": false,
+    "ignoreDeprecations": "6.0",
+    // Base URL for path resolution
+    "baseUrl": ".",
     // Path aliases
     "paths": {
       "@/*": ["./src/*"],

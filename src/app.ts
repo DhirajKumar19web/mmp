@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 
 import { ApiResponse, errorHandler, HTTP_STATUS, ServiceUnavailableError } from "@common";
 import { config } from "@config/config";
+import { globalRateLimiter } from "@middlewares";
 
 const app = express();
 app.set("trust proxy", config.server.trustProxy || 1);
@@ -52,6 +53,9 @@ app.get("/health/ready", (_req: Request, res: Response) => {
     throw new ServiceUnavailableError("Database disconnected");
   }
 });
+
+// Global Rate Limiter for all API routes
+app.use(globalRateLimiter);
 
 app.use(errorHandler);
 
