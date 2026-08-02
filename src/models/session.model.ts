@@ -1,29 +1,6 @@
-import { model, Schema, type Document, type Types } from "mongoose";
+import { model, Schema } from "mongoose";
 
-export enum DeviceType {
-  DESKTOP = "DESKTOP",
-  MOBILE = "MOBILE",
-  TABLET = "TABLET",
-  UNKNOWN = "UNKNOWN",
-}
-
-export interface ISession extends Document {
-  sessionId: string;
-  user: Types.ObjectId;
-  refreshTokenHash: string;
-
-  deviceName?: string;
-  deviceType: DeviceType;
-  ipAddress?: string;
-  userAgent?: string;
-
-  isRevoked: boolean;
-  lastActiveAt: Date;
-  expiresAt: Date;
-
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { DeviceType, type ISession } from "@/types/session";
 
 const SessionSchema = new Schema<ISession>(
   {

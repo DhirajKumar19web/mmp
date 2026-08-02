@@ -2,8 +2,8 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { ZodError } from "zod";
 
-import { HTTP_STATUS } from "@common/constants";
-import { AppError, TooManyRequestsError } from "@common/errors/AppError";
+import { HTTP_STATUS } from "@constants";
+import { AppError, TooManyRequestsError } from "@errors/app-error";
 
 import type { NextFunction, Request, Response } from "express";
 
@@ -11,7 +11,6 @@ export const errorHandler = (
   err: unknown,
   req: Request,
   res: Response,
-
   _next: NextFunction
 ): void => {
   let statusCode: number = HTTP_STATUS.INTERNAL_SERVER_ERROR;

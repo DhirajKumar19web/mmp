@@ -1,8 +1,7 @@
 import { Cluster, Redis, type RedisOptions } from "ioredis";
 
 import { config, logger } from "@config";
-
-import { LUA_SCRIPTS } from "./lua-scripts";
+import { LUA_SCRIPTS } from "@redis/lua-scripts";
 
 interface StoreEntry {
   value: number;

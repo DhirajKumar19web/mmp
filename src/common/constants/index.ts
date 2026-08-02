@@ -1,1 +1,1 @@
-export * from "@common/constants/httpStatus";
+export * from "@/common/constants/http-status";

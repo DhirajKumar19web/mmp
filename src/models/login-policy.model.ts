@@ -1,48 +1,6 @@
-import { model, Schema, type Document, type Types } from "mongoose";
+import { model, Schema } from "mongoose";
 
-export enum SessionLimitBehavior {
-  LOGOUT_OLDEST = "LOGOUT_OLDEST",
-  BLOCK_NEW_LOGIN = "BLOCK_NEW_LOGIN",
-}
-
-export interface ILoginPolicy extends Document {
-  organization: Types.ObjectId;
-
-  // Concurrent Session Controls
-  maxConcurrentSessions: number;
-  sessionLimitBehavior: SessionLimitBehavior;
-
-  // Account Lockout Policy
-  maxFailedLoginAttempts: number;
-  lockoutDurationMinutes: number;
-
-  // Session & Token Lifespan
-  accessTokenTtlMinutes: number;
-  refreshTokenTtlDays: number;
-  idleTimeoutMinutes?: number | null;
-
-  // Security & MFA
-  requireMfa: boolean;
-  requirePasswordChangeOnFirstLogin: boolean;
-  passwordExpireDays?: number | null;
-
-  // IP & Location Restrictions
-  ipWhitelistingEnabled: boolean;
-  allowedIpRanges: string[];
-
-  // Time Restrictions
-  timeRestrictionEnabled: boolean;
-  allowedDays: number[];
-  allowedStartTime?: string | null;
-  allowedEndTime?: string | null;
-
-  isActive: boolean;
-  createdBy?: Types.ObjectId | null;
-  updatedBy?: Types.ObjectId | null;
-
-  createdAt: Date;
-  updatedAt: Date;
-}
+import { SessionLimitBehavior, type ILoginPolicy } from "@/types/login-policy";
 
 const LoginPolicySchema = new Schema<ILoginPolicy>(
   {

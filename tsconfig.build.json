@@ -23,13 +23,23 @@
     "paths": {
       "@/*": ["./src/*"],
       "@common": ["./src/common/index.ts"],
+      "@common/constants": ["./src/common/constants/index.ts"],
+      "@common/constants/*": ["./src/common/constants/*"],
+      "@common/errors": ["./src/common/errors/index.ts"],
+      "@common/errors/*": ["./src/common/errors/*"],
+      "@common/types": ["./src/common/types/index.ts", "./src/types/index.ts"],
+      "@common/types/*": ["./src/common/types/*", "./src/types/*"],
+      "@common/utils": ["./src/common/utils/index.ts"],
+      "@common/utils/*": ["./src/common/utils/*"],
       "@common/*": ["./src/common/*"],
       "@config": ["./src/config/index.ts"],
       "@config/*": ["./src/config/*"],
       "@redis": ["./src/redis/index.ts"],
       "@redis/*": ["./src/redis/*"],
-      "@middleware": ["./src/middleware/index.ts"],
-      "@middleware/*": ["./src/middleware/*", "./src/common/middleware/*"],
+      "@middlewares": ["./src/middlewares/index.ts"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@middleware": ["./src/middlewares/index.ts"],
+      "@middleware/*": ["./src/middlewares/*"],
       "@utils": ["./src/common/utils/index.ts"],
       "@utils/*": ["./src/common/utils/*", "./src/utils/*"],
       "@types": ["./src/types/index.ts"],
@@ -43,7 +53,11 @@
       "@logger": ["./src/logger/index.ts"],
       "@logger/*": ["./src/logger/*"],
       "@models": ["./src/models/index.ts"],
-      "@models/*": ["./src/models/*"]
+      "@models/*": ["./src/models/*"],
+      "@controllers": ["./src/controllers/index.ts"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@services": ["./src/services/index.ts"],
+      "@services/*": ["./src/services/*"]
     },
     /* ==========================================================================
        Type Checking

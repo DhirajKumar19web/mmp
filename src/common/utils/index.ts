@@ -1,1 +1,1 @@
-export * from "@common/utils/ApiResponse";
+export * from "@/common/utils/api-response";
