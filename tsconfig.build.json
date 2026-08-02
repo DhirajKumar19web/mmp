@@ -31,7 +31,8 @@
       "@constants/*": ["./src/common/constants/*", "./src/constants/*"],
       "@errors/*": ["./src/common/errors/*", "./src/errors/*"],
       "@validations/*": ["./src/validations/*"],
-      "@logger/*": ["./src/logger/*"]
+      "@logger/*": ["./src/logger/*"],
+      "@models/*": ["./src/models/*"]
     },
     /* ==========================================================================
        Type Checking
